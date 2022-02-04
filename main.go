@@ -6,7 +6,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/c-beltran/funfacts/facts/apis"
+	"github.com/c-beltran/funfacts/internal/facts/apis"
 )
 
 func main() {

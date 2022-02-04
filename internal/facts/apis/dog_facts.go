@@ -8,7 +8,7 @@ import (
 
 	"github.com/rotisserie/eris"
 
-	"github.com/c-beltran/funfacts/facts"
+	"github.com/c-beltran/funfacts/internal/facts"
 )
 
 type (
