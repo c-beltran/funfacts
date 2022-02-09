@@ -46,7 +46,7 @@ func responseStatus(w http.ResponseWriter, payload interface{}, err error) {
 	if payload == nil {
 		w.WriteHeader(http.StatusNoContent)
 	} else {
-		var responseCode int
+		responseCode := http.StatusOK
 
 		res, err := json.Marshal(payload)
 		if err != nil {

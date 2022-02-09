@@ -25,7 +25,3 @@ func (r *RegisteredPath) Get(opID string, handler GetHandler) *RegisteredPath {
 	r.server.RegisterGetHandler(r.path, r.router, handler, r.args).Name(opID)
 	return r
 }
-
-// func (r *RegisteredPath) Post(opID string, handler PostHandler) *RegisteredPath {
-// 	r.server.RegisterPostHandler(r.path, r.router, handler, r.args).Name(opID)
-// }
