@@ -13,12 +13,12 @@ type (
 	}
 
 	DogFact struct {
-		finder DogFactFinder
+		Finder DogFactFinder
 	}
 )
 
 func (svc DogFact) Find(ctx context.Context) (facts.Dog, error) {
-	fact, err := svc.finder.FindDogFact(ctx)
+	fact, err := svc.Finder.FindDogFact(ctx)
 	if err != nil {
 		return facts.Dog{}, eris.Wrap(err, "unable to find dog fact")
 	}
