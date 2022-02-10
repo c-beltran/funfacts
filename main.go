@@ -19,13 +19,6 @@ func main() {
 
 	dogAPI := apis.NewClient(&httpClient, "https://dog-api.kinduff.com")
 
-	// dogFact, err := apiClient.FindDogFact(context.TODO())
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-
-	// fmt.Println("Dog fact: ", dogFact.Fact)
-
 	//-
 	restServer := rest.NewServer("/")
 	rest.Register(restServer, rest.RegisterParams{
