@@ -7,12 +7,12 @@ import (
 )
 
 type (
-	DogFacSvc interface {
+	DogFactSvc interface {
 		Find(ctx context.Context) (facts.Dog, error)
 	}
 
 	RegisterParams struct {
-		DogFact DogFacSvc
+		DogFact DogFactSvc
 	}
 )
 
