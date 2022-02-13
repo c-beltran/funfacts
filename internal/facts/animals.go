@@ -5,4 +5,9 @@ type (
 	Dog struct {
 		Fact string
 	}
+
+	// Cat defines a cat fact.
+	Cat struct {
+		Fact string
+	}
 )

@@ -18,12 +18,16 @@ func main() {
 	}
 
 	dogAPI := apis.NewClient(&httpClient, "https://dog-api.kinduff.com")
+	catAPI := apis.NewClient(&httpClient, "https://meowfacts.herokuapp.com")
 
 	//-
 	restServer := rest.NewServer("/")
 	rest.Register(restServer, rest.RegisterParams{
 		DogFact: &service.DogFact{
 			Finder: dogAPI,
+		},
+		CatFact: &service.CatFact{
+			Finder: catAPI,
 		},
 	})
 
