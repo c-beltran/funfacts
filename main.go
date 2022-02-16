@@ -19,6 +19,7 @@ func main() {
 
 	dogAPI := apis.NewClient(&httpClient, "https://dog-api.kinduff.com")
 	catAPI := apis.NewClient(&httpClient, "https://meowfacts.herokuapp.com")
+	entertainmentAPI := apis.NewClient(&httpClient, "https://asli-fun-fact-api.herokuapp.com")
 
 	//-
 	restServer := rest.NewServer("/")
@@ -28,6 +29,9 @@ func main() {
 		},
 		CatFact: &service.CatFact{
 			Finder: catAPI,
+		},
+		EntertainmentFact: &service.EntertainmentFact{
+			Finder: entertainmentAPI,
 		},
 	})
 

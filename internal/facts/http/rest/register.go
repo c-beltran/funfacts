@@ -15,9 +15,14 @@ type (
 		Find(ctx context.Context) (facts.Cat, error)
 	}
 
+	EntertainmentFactSvc interface {
+		Find(ctx context.Context) (facts.Entertainment, error)
+	}
+
 	RegisterParams struct {
-		DogFact DogFactSvc
-		CatFact CatFactSvc
+		DogFact           DogFactSvc
+		CatFact           CatFactSvc
+		EntertainmentFact EntertainmentFactSvc
 	}
 )
 
@@ -25,4 +30,5 @@ func Register(server *Server, services RegisterParams) {
 	router := server.Router.PathPrefix("/ffact").Subrouter()
 	registerDogFactHandlers(router, server, services.DogFact)
 	registerCatFactHandlers(router, server, services.CatFact)
+	registerEntertainmentFactHandlers(router, server, services.EntertainmentFact)
 }
