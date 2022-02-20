@@ -9,7 +9,7 @@ import (
 
 type (
 	DogFactFinder interface {
-		FindDogFact(ctx context.Context) (facts.Dog, error)
+		FindDogFact(ctx context.Context) (facts.Diversity, error)
 	}
 
 	DogFact struct {
@@ -17,10 +17,10 @@ type (
 	}
 )
 
-func (svc DogFact) Find(ctx context.Context) (facts.Dog, error) {
+func (svc DogFact) Find(ctx context.Context) (facts.Diversity, error) {
 	fact, err := svc.Finder.FindDogFact(ctx)
 	if err != nil {
-		return facts.Dog{}, eris.Wrap(err, "unable to find dog fact")
+		return facts.Diversity{}, eris.Wrap(err, "unable to find dog fact")
 	}
 
 	return fact, nil

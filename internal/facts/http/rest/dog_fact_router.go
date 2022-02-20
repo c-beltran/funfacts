@@ -21,13 +21,13 @@ func registerDogFactHandlers(router *mux.Router, server *Server, svc DogFactSvc)
 func getDogFact(svc DogFactSvc) func(*http.Request, *Server, map[string]interface{}) (interface{}, error) {
 	return func(r *http.Request, s *Server, m map[string]interface{}) (interface{}, error) {
 
-		dog, err := svc.Find(r.Context())
+		fact, err := svc.Find(r.Context())
 		if err != nil {
 			return nil, err
 		}
 
 		return GetDogFactResponse{
-			Fact: dog.Fact,
+			Fact: fact.Dog,
 		}, nil
 	}
 }

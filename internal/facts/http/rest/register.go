@@ -8,7 +8,7 @@ import (
 
 type (
 	DogFactSvc interface {
-		Find(ctx context.Context) (facts.Dog, error)
+		Find(ctx context.Context) (facts.Diversity, error)
 	}
 
 	CatFactSvc interface {
