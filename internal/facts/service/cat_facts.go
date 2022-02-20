@@ -9,7 +9,7 @@ import (
 
 type (
 	CatFactFinder interface {
-		FindCatFact(ctx context.Context) (facts.Cat, error)
+		FindCatFact(ctx context.Context) (facts.Diversity, error)
 	}
 
 	CatFact struct {
@@ -17,10 +17,10 @@ type (
 	}
 )
 
-func (svc CatFact) Find(ctx context.Context) (facts.Cat, error) {
+func (svc CatFact) Find(ctx context.Context) (facts.Diversity, error) {
 	fact, err := svc.Finder.FindCatFact(ctx)
 	if err != nil {
-		return facts.Cat{}, eris.Wrap(err, "unable to find cat fact")
+		return facts.Diversity{}, eris.Wrap(err, "unable to find cat fact")
 	}
 
 	return fact, nil

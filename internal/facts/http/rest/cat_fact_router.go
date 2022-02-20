@@ -21,13 +21,13 @@ func registerCatFactHandlers(router *mux.Router, server *Server, svc CatFactSvc)
 func getCatFact(svc CatFactSvc) func(*http.Request, *Server, map[string]interface{}) (interface{}, error) {
 	return func(r *http.Request, s *Server, m map[string]interface{}) (interface{}, error) {
 
-		cat, err := svc.Find(r.Context())
+		fact, err := svc.Find(r.Context())
 		if err != nil {
 			return nil, err
 		}
 
 		return GetCatFactResponse{
-			Fact: cat.Fact,
+			Fact: fact.Cat,
 		}, nil
 	}
 }

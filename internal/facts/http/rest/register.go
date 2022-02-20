@@ -12,15 +12,15 @@ type (
 	}
 
 	CatFactSvc interface {
-		Find(ctx context.Context) (facts.Cat, error)
+		Find(ctx context.Context) (facts.Diversity, error)
 	}
 
 	EntertainmentFactSvc interface {
-		Find(ctx context.Context) (facts.Entertainment, error)
+		Find(ctx context.Context) (facts.Diversity, error)
 	}
 
 	TrivialFactSvc interface {
-		Find(ctx context.Context) (facts.Trivial, error)
+		Find(ctx context.Context) (facts.Diversity, error)
 	}
 
 	RegisterParams struct {

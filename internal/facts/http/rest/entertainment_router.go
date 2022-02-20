@@ -13,21 +13,21 @@ type (
 )
 
 func registerEntertainmentFactHandlers(router *mux.Router, server *Server, svc EntertainmentFactSvc) {
-	catRouter := router.PathPrefix("/entertainment").Subrouter()
+	entRouter := router.PathPrefix("/entertainment").Subrouter()
 
-	server.RegisterPath("", catRouter).Get("getEntertainmentFact", getEntertainmentFact(svc))
+	server.RegisterPath("", entRouter).Get("getEntertainmentFact", getEntertainmentFact(svc))
 }
 
 func getEntertainmentFact(svc EntertainmentFactSvc) func(*http.Request, *Server, map[string]interface{}) (interface{}, error) {
 	return func(r *http.Request, s *Server, m map[string]interface{}) (interface{}, error) {
 
-		cat, err := svc.Find(r.Context())
+		fact, err := svc.Find(r.Context())
 		if err != nil {
 			return nil, err
 		}
 
 		return GetEntertainmentFactResponse{
-			Fact: cat.Fact,
+			Fact: fact.Entertainment,
 		}, nil
 	}
 }

@@ -9,7 +9,7 @@ import (
 
 type (
 	EntertainmentFactFinder interface {
-		FindEntertainmentFact(ctx context.Context) (facts.Entertainment, error)
+		FindEntertainmentFact(ctx context.Context) (facts.Diversity, error)
 	}
 
 	EntertainmentFact struct {
@@ -17,10 +17,10 @@ type (
 	}
 )
 
-func (svc EntertainmentFact) Find(ctx context.Context) (facts.Entertainment, error) {
+func (svc EntertainmentFact) Find(ctx context.Context) (facts.Diversity, error) {
 	fact, err := svc.Finder.FindEntertainmentFact(ctx)
 	if err != nil {
-		return facts.Entertainment{}, eris.Wrap(err, "unable to find entertainment fact")
+		return facts.Diversity{}, eris.Wrap(err, "unable to find entertainment fact")
 	}
 
 	return fact, nil
