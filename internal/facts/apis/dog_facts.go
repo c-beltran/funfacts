@@ -49,7 +49,7 @@ func (c *Client) FindDogFact(ctx context.Context) (facts.Dog, error) {
 	defer res.Body.Close()
 
 	if res.StatusCode != http.StatusOK {
-		return facts.Dog{}, eris.Wrapf(err, "bad status code from server %d", res.StatusCode)
+		return facts.Dog{}, eris.Wrap(fmt.Errorf("bad status code from server %d", res.StatusCode), "")
 	}
 
 	if err = json.NewDecoder(res.Body).Decode(&response); err != nil {
