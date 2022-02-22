@@ -7,34 +7,19 @@ import (
 )
 
 type (
-	DogFactSvc interface {
-		Find(ctx context.Context) (facts.Diversity, error)
-	}
-
-	CatFactSvc interface {
-		Find(ctx context.Context) (facts.Diversity, error)
-	}
-
-	EntertainmentFactSvc interface {
-		Find(ctx context.Context) (facts.Diversity, error)
-	}
-
-	TrivialFactSvc interface {
-		Find(ctx context.Context) (facts.Diversity, error)
+	FactSvc interface {
+		Find(ctx context.Context, topic string) (facts.FactTopic, error)
 	}
 
 	RegisterParams struct {
-		DogFact           DogFactSvc
-		CatFact           CatFactSvc
-		EntertainmentFact EntertainmentFactSvc
-		TrivialFact       TrivialFactSvc
+		Fact FactSvc
 	}
 )
 
 func Register(server *Server, services RegisterParams) {
 	router := server.Router.PathPrefix("/ffact").Subrouter()
-	registerDogFactHandlers(router, server, services.DogFact)
-	registerCatFactHandlers(router, server, services.CatFact)
-	registerEntertainmentFactHandlers(router, server, services.EntertainmentFact)
-	registerTrivialFactHandlers(router, server, services.TrivialFact)
+	registerDogFactHandlers(router, server, services.Fact)
+	registerCatFactHandlers(router, server, services.Fact)
+	registerEntertainmentFactHandlers(router, server, services.Fact)
+	registerTrivialFactHandlers(router, server, services.Fact)
 }

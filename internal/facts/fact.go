@@ -2,8 +2,8 @@ package facts
 
 type (
 
-	// Diversity defines the variety of facts flavors.
-	Diversity struct {
+	// FactTopic defines the variety of facts flavors.
+	FactTopic struct {
 		Dog           string
 		Cat           string
 		Entertainment string

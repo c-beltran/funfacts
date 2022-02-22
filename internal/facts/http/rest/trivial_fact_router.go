@@ -12,16 +12,16 @@ type (
 	}
 )
 
-func registerTrivialFactHandlers(router *mux.Router, server *Server, svc TrivialFactSvc) {
+func registerTrivialFactHandlers(router *mux.Router, server *Server, svc FactSvc) {
 	trivRouter := router.PathPrefix("/trivial").Subrouter()
 
 	server.RegisterPath("", trivRouter).Get("getTrivialFact", getTrivialFact(svc))
 }
 
-func getTrivialFact(svc TrivialFactSvc) func(*http.Request, *Server, map[string]interface{}) (interface{}, error) {
+func getTrivialFact(svc FactSvc) func(*http.Request, *Server, map[string]interface{}) (interface{}, error) {
 	return func(r *http.Request, s *Server, m map[string]interface{}) (interface{}, error) {
 
-		fact, err := svc.Find(r.Context())
+		fact, err := svc.Find(r.Context(), "trivial")
 		if err != nil {
 			return nil, err
 		}

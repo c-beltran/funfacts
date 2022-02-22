@@ -12,16 +12,16 @@ type (
 	}
 )
 
-func registerDogFactHandlers(router *mux.Router, server *Server, svc DogFactSvc) {
+func registerDogFactHandlers(router *mux.Router, server *Server, svc FactSvc) {
 	dogRouter := router.PathPrefix("/dog").Subrouter()
 
 	server.RegisterPath("", dogRouter).Get("getDogFact", getDogFact(svc))
 }
 
-func getDogFact(svc DogFactSvc) func(*http.Request, *Server, map[string]interface{}) (interface{}, error) {
+func getDogFact(svc FactSvc) func(*http.Request, *Server, map[string]interface{}) (interface{}, error) {
 	return func(r *http.Request, s *Server, m map[string]interface{}) (interface{}, error) {
 
-		fact, err := svc.Find(r.Context())
+		fact, err := svc.Find(r.Context(), "dog")
 		if err != nil {
 			return nil, err
 		}

@@ -23,7 +23,7 @@ func Test_FindDogFact(t *testing.T) {
 		}
 
 		expected struct {
-			fact facts.Diversity
+			fact facts.FactTopic
 			err  error
 		}
 	)
@@ -47,7 +47,7 @@ func Test_FindDogFact(t *testing.T) {
 				context.Background(),
 			},
 			expected{
-				fact: facts.Diversity{
+				fact: facts.FactTopic{
 					Dog: "Dogs wag their tail when they are happy",
 				},
 			},

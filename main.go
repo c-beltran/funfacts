@@ -25,17 +25,11 @@ func main() {
 	//-
 	restServer := rest.NewServer("/")
 	rest.Register(restServer, rest.RegisterParams{
-		DogFact: &service.DogFact{
-			Finder: dogAPI,
-		},
-		CatFact: &service.CatFact{
-			Finder: catAPI,
-		},
-		EntertainmentFact: &service.EntertainmentFact{
-			Finder: entertainmentAPI,
-		},
-		TrivialFact: &service.TrivialFact{
-			Finder: trivialAPI,
+		Fact: &service.FactSVC{
+			CFinder: catAPI,
+			DFinder: dogAPI,
+			EFinder: entertainmentAPI,
+			TFinder: trivialAPI,
 		},
 	})
 
