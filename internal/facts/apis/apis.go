@@ -46,7 +46,7 @@ func (c *Client) FindCatFact(ctx context.Context) (facts.FactTopic, error) {
 	defer res.Body.Close()
 
 	if res.StatusCode != http.StatusOK {
-		return facts.FactTopic{}, eris.Wrapf(err, "bad status code from server %d", res.StatusCode)
+		return facts.FactTopic{}, eris.Wrap(fmt.Errorf("bad status code from server %d", res.StatusCode), "")
 	}
 
 	if err = json.NewDecoder(res.Body).Decode(&response); err != nil {
@@ -100,9 +100,9 @@ func (c *Client) FindDogFact(ctx context.Context) (facts.FactTopic, error) {
 func (c *Client) FindEntertainmentFact(ctx context.Context) (facts.FactTopic, error) {
 	type (
 		data struct {
-			ID                 string `json:"id"`
-			Fact               string `json:"fact"`
-			Entertainmentegory string `json:"cat"`
+			ID       string `json:"id"`
+			Fact     string `json:"fact"`
+			Category string `json:"cat"`
 		}
 	)
 
@@ -125,7 +125,7 @@ func (c *Client) FindEntertainmentFact(ctx context.Context) (facts.FactTopic, er
 	defer res.Body.Close()
 
 	if res.StatusCode != http.StatusOK {
-		return facts.FactTopic{}, eris.Wrapf(err, "bad status code from server %d", res.StatusCode)
+		return facts.FactTopic{}, eris.Wrap(fmt.Errorf("bad status code from server %d", res.StatusCode), "")
 	}
 
 	if err = json.NewDecoder(res.Body).Decode(&response); err != nil {
@@ -158,7 +158,7 @@ func (c *Client) FindTrivialFact(ctx context.Context) (facts.FactTopic, error) {
 	defer res.Body.Close()
 
 	if res.StatusCode != http.StatusOK {
-		return facts.FactTopic{}, eris.Wrapf(err, "bad status code from server %d", res.StatusCode)
+		return facts.FactTopic{}, eris.Wrap(fmt.Errorf("bad status code from server %d", res.StatusCode), "")
 	}
 
 	if err = json.NewDecoder(res.Body).Decode(&response); err != nil {
