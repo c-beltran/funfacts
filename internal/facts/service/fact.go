@@ -7,7 +7,13 @@ import (
 	"github.com/rotisserie/eris"
 )
 
-// work on combining all in one.
+//go:generate go run github.com/maxbrunsfeld/counterfeiter/v6 -generate
+
+//counterfeiter:generate -o ../facttesting/fake_cat_fact_finder.gen.go . CatFactFinder
+//counterfeiter:generate -o ../facttesting/fake_dog_fact_finder.gen.go . DogFactFinder
+//counterfeiter:generate -o ../facttesting/fake_entertainment_fact_finder.gen.go . EntertainmentFactFinder
+//counterfeiter:generate -o ../facttesting/fake_trivial_fact_finder.gen.go . TrivialFactFinder
+
 type (
 	CatFactFinder interface {
 		FindCatFact(ctx context.Context) (facts.FactTopic, error)

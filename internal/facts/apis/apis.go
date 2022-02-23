@@ -26,6 +26,7 @@ func NewClient(client *http.Client, host string) *Client {
 	}
 }
 
+// FindCatFact returns a cat fact.
 func (c *Client) FindCatFact(ctx context.Context) (facts.FactTopic, error) {
 	var response struct {
 		Facts []string `json:"data"`
@@ -58,6 +59,7 @@ func (c *Client) FindCatFact(ctx context.Context) (facts.FactTopic, error) {
 	}, nil
 }
 
+// FindDogFact returns a dog fact.
 func (c *Client) FindDogFact(ctx context.Context) (facts.FactTopic, error) {
 	const path = `/api/facts`
 
@@ -97,6 +99,7 @@ func (c *Client) FindDogFact(ctx context.Context) (facts.FactTopic, error) {
 	}, nil
 }
 
+// FindEntertainmentFact returns a entertainment fact.
 func (c *Client) FindEntertainmentFact(ctx context.Context) (facts.FactTopic, error) {
 	type (
 		data struct {
@@ -137,6 +140,7 @@ func (c *Client) FindEntertainmentFact(ctx context.Context) (facts.FactTopic, er
 	}, nil
 }
 
+// FindTrivialFact returns a trivial fact.
 func (c *Client) FindTrivialFact(ctx context.Context) (facts.FactTopic, error) {
 	var response struct {
 		Fact string `json:"text"`
