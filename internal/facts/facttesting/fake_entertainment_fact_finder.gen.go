@@ -10,24 +10,24 @@ import (
 )
 
 type FakeEntertainmentFactFinder struct {
-	FindEntertainmentFactStub        func(context.Context) (facts.FactTopic, error)
+	FindEntertainmentFactStub        func(context.Context) (facts.Topic, error)
 	findEntertainmentFactMutex       sync.RWMutex
 	findEntertainmentFactArgsForCall []struct {
 		arg1 context.Context
 	}
 	findEntertainmentFactReturns struct {
-		result1 facts.FactTopic
+		result1 facts.Topic
 		result2 error
 	}
 	findEntertainmentFactReturnsOnCall map[int]struct {
-		result1 facts.FactTopic
+		result1 facts.Topic
 		result2 error
 	}
 	invocations      map[string][][]interface{}
 	invocationsMutex sync.RWMutex
 }
 
-func (fake *FakeEntertainmentFactFinder) FindEntertainmentFact(arg1 context.Context) (facts.FactTopic, error) {
+func (fake *FakeEntertainmentFactFinder) FindEntertainmentFact(arg1 context.Context) (facts.Topic, error) {
 	fake.findEntertainmentFactMutex.Lock()
 	ret, specificReturn := fake.findEntertainmentFactReturnsOnCall[len(fake.findEntertainmentFactArgsForCall)]
 	fake.findEntertainmentFactArgsForCall = append(fake.findEntertainmentFactArgsForCall, struct {
@@ -52,7 +52,7 @@ func (fake *FakeEntertainmentFactFinder) FindEntertainmentFactCallCount() int {
 	return len(fake.findEntertainmentFactArgsForCall)
 }
 
-func (fake *FakeEntertainmentFactFinder) FindEntertainmentFactCalls(stub func(context.Context) (facts.FactTopic, error)) {
+func (fake *FakeEntertainmentFactFinder) FindEntertainmentFactCalls(stub func(context.Context) (facts.Topic, error)) {
 	fake.findEntertainmentFactMutex.Lock()
 	defer fake.findEntertainmentFactMutex.Unlock()
 	fake.FindEntertainmentFactStub = stub
@@ -65,28 +65,28 @@ func (fake *FakeEntertainmentFactFinder) FindEntertainmentFactArgsForCall(i int)
 	return argsForCall.arg1
 }
 
-func (fake *FakeEntertainmentFactFinder) FindEntertainmentFactReturns(result1 facts.FactTopic, result2 error) {
+func (fake *FakeEntertainmentFactFinder) FindEntertainmentFactReturns(result1 facts.Topic, result2 error) {
 	fake.findEntertainmentFactMutex.Lock()
 	defer fake.findEntertainmentFactMutex.Unlock()
 	fake.FindEntertainmentFactStub = nil
 	fake.findEntertainmentFactReturns = struct {
-		result1 facts.FactTopic
+		result1 facts.Topic
 		result2 error
 	}{result1, result2}
 }
 
-func (fake *FakeEntertainmentFactFinder) FindEntertainmentFactReturnsOnCall(i int, result1 facts.FactTopic, result2 error) {
+func (fake *FakeEntertainmentFactFinder) FindEntertainmentFactReturnsOnCall(i int, result1 facts.Topic, result2 error) {
 	fake.findEntertainmentFactMutex.Lock()
 	defer fake.findEntertainmentFactMutex.Unlock()
 	fake.FindEntertainmentFactStub = nil
 	if fake.findEntertainmentFactReturnsOnCall == nil {
 		fake.findEntertainmentFactReturnsOnCall = make(map[int]struct {
-			result1 facts.FactTopic
+			result1 facts.Topic
 			result2 error
 		})
 	}
 	fake.findEntertainmentFactReturnsOnCall[i] = struct {
-		result1 facts.FactTopic
+		result1 facts.Topic
 		result2 error
 	}{result1, result2}
 }

@@ -10,24 +10,24 @@ import (
 )
 
 type FakeDogFactFinder struct {
-	FindDogFactStub        func(context.Context) (facts.FactTopic, error)
+	FindDogFactStub        func(context.Context) (facts.Topic, error)
 	findDogFactMutex       sync.RWMutex
 	findDogFactArgsForCall []struct {
 		arg1 context.Context
 	}
 	findDogFactReturns struct {
-		result1 facts.FactTopic
+		result1 facts.Topic
 		result2 error
 	}
 	findDogFactReturnsOnCall map[int]struct {
-		result1 facts.FactTopic
+		result1 facts.Topic
 		result2 error
 	}
 	invocations      map[string][][]interface{}
 	invocationsMutex sync.RWMutex
 }
 
-func (fake *FakeDogFactFinder) FindDogFact(arg1 context.Context) (facts.FactTopic, error) {
+func (fake *FakeDogFactFinder) FindDogFact(arg1 context.Context) (facts.Topic, error) {
 	fake.findDogFactMutex.Lock()
 	ret, specificReturn := fake.findDogFactReturnsOnCall[len(fake.findDogFactArgsForCall)]
 	fake.findDogFactArgsForCall = append(fake.findDogFactArgsForCall, struct {
@@ -52,7 +52,7 @@ func (fake *FakeDogFactFinder) FindDogFactCallCount() int {
 	return len(fake.findDogFactArgsForCall)
 }
 
-func (fake *FakeDogFactFinder) FindDogFactCalls(stub func(context.Context) (facts.FactTopic, error)) {
+func (fake *FakeDogFactFinder) FindDogFactCalls(stub func(context.Context) (facts.Topic, error)) {
 	fake.findDogFactMutex.Lock()
 	defer fake.findDogFactMutex.Unlock()
 	fake.FindDogFactStub = stub
@@ -65,28 +65,28 @@ func (fake *FakeDogFactFinder) FindDogFactArgsForCall(i int) context.Context {
 	return argsForCall.arg1
 }
 
-func (fake *FakeDogFactFinder) FindDogFactReturns(result1 facts.FactTopic, result2 error) {
+func (fake *FakeDogFactFinder) FindDogFactReturns(result1 facts.Topic, result2 error) {
 	fake.findDogFactMutex.Lock()
 	defer fake.findDogFactMutex.Unlock()
 	fake.FindDogFactStub = nil
 	fake.findDogFactReturns = struct {
-		result1 facts.FactTopic
+		result1 facts.Topic
 		result2 error
 	}{result1, result2}
 }
 
-func (fake *FakeDogFactFinder) FindDogFactReturnsOnCall(i int, result1 facts.FactTopic, result2 error) {
+func (fake *FakeDogFactFinder) FindDogFactReturnsOnCall(i int, result1 facts.Topic, result2 error) {
 	fake.findDogFactMutex.Lock()
 	defer fake.findDogFactMutex.Unlock()
 	fake.FindDogFactStub = nil
 	if fake.findDogFactReturnsOnCall == nil {
 		fake.findDogFactReturnsOnCall = make(map[int]struct {
-			result1 facts.FactTopic
+			result1 facts.Topic
 			result2 error
 		})
 	}
 	fake.findDogFactReturnsOnCall[i] = struct {
-		result1 facts.FactTopic
+		result1 facts.Topic
 		result2 error
 	}{result1, result2}
 }

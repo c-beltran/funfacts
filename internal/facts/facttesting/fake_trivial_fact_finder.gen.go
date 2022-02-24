@@ -10,24 +10,24 @@ import (
 )
 
 type FakeTrivialFactFinder struct {
-	FindTrivialFactStub        func(context.Context) (facts.FactTopic, error)
+	FindTrivialFactStub        func(context.Context) (facts.Topic, error)
 	findTrivialFactMutex       sync.RWMutex
 	findTrivialFactArgsForCall []struct {
 		arg1 context.Context
 	}
 	findTrivialFactReturns struct {
-		result1 facts.FactTopic
+		result1 facts.Topic
 		result2 error
 	}
 	findTrivialFactReturnsOnCall map[int]struct {
-		result1 facts.FactTopic
+		result1 facts.Topic
 		result2 error
 	}
 	invocations      map[string][][]interface{}
 	invocationsMutex sync.RWMutex
 }
 
-func (fake *FakeTrivialFactFinder) FindTrivialFact(arg1 context.Context) (facts.FactTopic, error) {
+func (fake *FakeTrivialFactFinder) FindTrivialFact(arg1 context.Context) (facts.Topic, error) {
 	fake.findTrivialFactMutex.Lock()
 	ret, specificReturn := fake.findTrivialFactReturnsOnCall[len(fake.findTrivialFactArgsForCall)]
 	fake.findTrivialFactArgsForCall = append(fake.findTrivialFactArgsForCall, struct {
@@ -52,7 +52,7 @@ func (fake *FakeTrivialFactFinder) FindTrivialFactCallCount() int {
 	return len(fake.findTrivialFactArgsForCall)
 }
 
-func (fake *FakeTrivialFactFinder) FindTrivialFactCalls(stub func(context.Context) (facts.FactTopic, error)) {
+func (fake *FakeTrivialFactFinder) FindTrivialFactCalls(stub func(context.Context) (facts.Topic, error)) {
 	fake.findTrivialFactMutex.Lock()
 	defer fake.findTrivialFactMutex.Unlock()
 	fake.FindTrivialFactStub = stub
@@ -65,28 +65,28 @@ func (fake *FakeTrivialFactFinder) FindTrivialFactArgsForCall(i int) context.Con
 	return argsForCall.arg1
 }
 
-func (fake *FakeTrivialFactFinder) FindTrivialFactReturns(result1 facts.FactTopic, result2 error) {
+func (fake *FakeTrivialFactFinder) FindTrivialFactReturns(result1 facts.Topic, result2 error) {
 	fake.findTrivialFactMutex.Lock()
 	defer fake.findTrivialFactMutex.Unlock()
 	fake.FindTrivialFactStub = nil
 	fake.findTrivialFactReturns = struct {
-		result1 facts.FactTopic
+		result1 facts.Topic
 		result2 error
 	}{result1, result2}
 }
 
-func (fake *FakeTrivialFactFinder) FindTrivialFactReturnsOnCall(i int, result1 facts.FactTopic, result2 error) {
+func (fake *FakeTrivialFactFinder) FindTrivialFactReturnsOnCall(i int, result1 facts.Topic, result2 error) {
 	fake.findTrivialFactMutex.Lock()
 	defer fake.findTrivialFactMutex.Unlock()
 	fake.FindTrivialFactStub = nil
 	if fake.findTrivialFactReturnsOnCall == nil {
 		fake.findTrivialFactReturnsOnCall = make(map[int]struct {
-			result1 facts.FactTopic
+			result1 facts.Topic
 			result2 error
 		})
 	}
 	fake.findTrivialFactReturnsOnCall[i] = struct {
-		result1 facts.FactTopic
+		result1 facts.Topic
 		result2 error
 	}{result1, result2}
 }

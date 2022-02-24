@@ -10,24 +10,24 @@ import (
 )
 
 type FakeCatFactFinder struct {
-	FindCatFactStub        func(context.Context) (facts.FactTopic, error)
+	FindCatFactStub        func(context.Context) (facts.Topic, error)
 	findCatFactMutex       sync.RWMutex
 	findCatFactArgsForCall []struct {
 		arg1 context.Context
 	}
 	findCatFactReturns struct {
-		result1 facts.FactTopic
+		result1 facts.Topic
 		result2 error
 	}
 	findCatFactReturnsOnCall map[int]struct {
-		result1 facts.FactTopic
+		result1 facts.Topic
 		result2 error
 	}
 	invocations      map[string][][]interface{}
 	invocationsMutex sync.RWMutex
 }
 
-func (fake *FakeCatFactFinder) FindCatFact(arg1 context.Context) (facts.FactTopic, error) {
+func (fake *FakeCatFactFinder) FindCatFact(arg1 context.Context) (facts.Topic, error) {
 	fake.findCatFactMutex.Lock()
 	ret, specificReturn := fake.findCatFactReturnsOnCall[len(fake.findCatFactArgsForCall)]
 	fake.findCatFactArgsForCall = append(fake.findCatFactArgsForCall, struct {
@@ -52,7 +52,7 @@ func (fake *FakeCatFactFinder) FindCatFactCallCount() int {
 	return len(fake.findCatFactArgsForCall)
 }
 
-func (fake *FakeCatFactFinder) FindCatFactCalls(stub func(context.Context) (facts.FactTopic, error)) {
+func (fake *FakeCatFactFinder) FindCatFactCalls(stub func(context.Context) (facts.Topic, error)) {
 	fake.findCatFactMutex.Lock()
 	defer fake.findCatFactMutex.Unlock()
 	fake.FindCatFactStub = stub
@@ -65,28 +65,28 @@ func (fake *FakeCatFactFinder) FindCatFactArgsForCall(i int) context.Context {
 	return argsForCall.arg1
 }
 
-func (fake *FakeCatFactFinder) FindCatFactReturns(result1 facts.FactTopic, result2 error) {
+func (fake *FakeCatFactFinder) FindCatFactReturns(result1 facts.Topic, result2 error) {
 	fake.findCatFactMutex.Lock()
 	defer fake.findCatFactMutex.Unlock()
 	fake.FindCatFactStub = nil
 	fake.findCatFactReturns = struct {
-		result1 facts.FactTopic
+		result1 facts.Topic
 		result2 error
 	}{result1, result2}
 }
 
-func (fake *FakeCatFactFinder) FindCatFactReturnsOnCall(i int, result1 facts.FactTopic, result2 error) {
+func (fake *FakeCatFactFinder) FindCatFactReturnsOnCall(i int, result1 facts.Topic, result2 error) {
 	fake.findCatFactMutex.Lock()
 	defer fake.findCatFactMutex.Unlock()
 	fake.FindCatFactStub = nil
 	if fake.findCatFactReturnsOnCall == nil {
 		fake.findCatFactReturnsOnCall = make(map[int]struct {
-			result1 facts.FactTopic
+			result1 facts.Topic
 			result2 error
 		})
 	}
 	fake.findCatFactReturnsOnCall[i] = struct {
-		result1 facts.FactTopic
+		result1 facts.Topic
 		result2 error
 	}{result1, result2}
 }

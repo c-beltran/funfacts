@@ -27,40 +27,40 @@ func NewClient(client *http.Client, host string) *Client {
 }
 
 // FindCatFact returns a cat fact.
-func (c *Client) FindCatFact(ctx context.Context) (facts.FactTopic, error) {
+func (c *Client) FindCatFact(ctx context.Context) (facts.Topic, error) {
 	var response struct {
 		Facts []string `json:"data"`
 	}
 
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, fmt.Sprintf("%s%s", c.host, ""), nil)
 	if err != nil {
-		return facts.FactTopic{}, eris.Wrap(err, "creating request for cat facts failed")
+		return facts.Topic{}, eris.Wrap(err, "creating request for cat facts failed")
 	}
 
 	res, err := c.httpClient.Do(req)
 	if err != nil {
 		if err != nil {
-			return facts.FactTopic{}, eris.Wrap(err, "request for cat facts failed")
+			return facts.Topic{}, eris.Wrap(err, "request for cat facts failed")
 		}
 	}
 
 	defer res.Body.Close()
 
 	if res.StatusCode != http.StatusOK {
-		return facts.FactTopic{}, eris.Wrap(fmt.Errorf("bad status code from server %d", res.StatusCode), "")
+		return facts.Topic{}, eris.Wrap(fmt.Errorf("bad status code from server %d", res.StatusCode), "")
 	}
 
 	if err = json.NewDecoder(res.Body).Decode(&response); err != nil {
-		return facts.FactTopic{}, eris.Wrap(err, "failed to parse response")
+		return facts.Topic{}, eris.Wrap(err, "failed to parse response")
 	}
 
-	return facts.FactTopic{
+	return facts.Topic{
 		Cat: response.Facts[0],
 	}, nil
 }
 
 // FindDogFact returns a dog fact.
-func (c *Client) FindDogFact(ctx context.Context) (facts.FactTopic, error) {
+func (c *Client) FindDogFact(ctx context.Context) (facts.Topic, error) {
 	const path = `/api/facts`
 
 	var response struct {
@@ -70,37 +70,37 @@ func (c *Client) FindDogFact(ctx context.Context) (facts.FactTopic, error) {
 
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, fmt.Sprintf("%s%s", c.host, path), nil)
 	if err != nil {
-		return facts.FactTopic{}, eris.Wrap(err, "creating request for dog facts failed")
+		return facts.Topic{}, eris.Wrap(err, "creating request for dog facts failed")
 	}
 
 	res, err := c.httpClient.Do(req)
 	if err != nil {
 		if err != nil {
-			return facts.FactTopic{}, eris.Wrap(err, "request for dog facts failed")
+			return facts.Topic{}, eris.Wrap(err, "request for dog facts failed")
 		}
 	}
 
 	defer res.Body.Close()
 
 	if res.StatusCode != http.StatusOK {
-		return facts.FactTopic{}, eris.Wrap(fmt.Errorf("bad status code from server %d", res.StatusCode), "")
+		return facts.Topic{}, eris.Wrap(fmt.Errorf("bad status code from server %d", res.StatusCode), "")
 	}
 
 	if err = json.NewDecoder(res.Body).Decode(&response); err != nil {
-		return facts.FactTopic{}, eris.Wrap(err, "failed to parse response")
+		return facts.Topic{}, eris.Wrap(err, "failed to parse response")
 	}
 
 	if !response.Success {
-		return facts.FactTopic{}, eris.Wrap(err, "failed to fetch, unsucessful")
+		return facts.Topic{}, eris.Wrap(err, "failed to fetch, unsucessful")
 	}
 
-	return facts.FactTopic{
+	return facts.Topic{
 		Dog: response.Facts[0],
 	}, nil
 }
 
 // FindEntertainmentFact returns a entertainment fact.
-func (c *Client) FindEntertainmentFact(ctx context.Context) (facts.FactTopic, error) {
+func (c *Client) FindEntertainmentFact(ctx context.Context) (facts.Topic, error) {
 	type (
 		data struct {
 			ID       string `json:"id"`
@@ -115,33 +115,33 @@ func (c *Client) FindEntertainmentFact(ctx context.Context) (facts.FactTopic, er
 
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, fmt.Sprintf("%s%s", c.host, ""), nil)
 	if err != nil {
-		return facts.FactTopic{}, eris.Wrap(err, "creating request for entertainment facts failed")
+		return facts.Topic{}, eris.Wrap(err, "creating request for entertainment facts failed")
 	}
 
 	res, err := c.httpClient.Do(req)
 	if err != nil {
 		if err != nil {
-			return facts.FactTopic{}, eris.Wrap(err, "request for entertainment facts failed")
+			return facts.Topic{}, eris.Wrap(err, "request for entertainment facts failed")
 		}
 	}
 
 	defer res.Body.Close()
 
 	if res.StatusCode != http.StatusOK {
-		return facts.FactTopic{}, eris.Wrap(fmt.Errorf("bad status code from server %d", res.StatusCode), "")
+		return facts.Topic{}, eris.Wrap(fmt.Errorf("bad status code from server %d", res.StatusCode), "")
 	}
 
 	if err = json.NewDecoder(res.Body).Decode(&response); err != nil {
-		return facts.FactTopic{}, eris.Wrap(err, "failed to parse response")
+		return facts.Topic{}, eris.Wrap(err, "failed to parse response")
 	}
 
-	return facts.FactTopic{
+	return facts.Topic{
 		Entertainment: response.Data.Fact,
 	}, nil
 }
 
 // FindTrivialFact returns a trivial fact.
-func (c *Client) FindTrivialFact(ctx context.Context) (facts.FactTopic, error) {
+func (c *Client) FindTrivialFact(ctx context.Context) (facts.Topic, error) {
 	var response struct {
 		Fact string `json:"text"`
 	}
@@ -149,27 +149,27 @@ func (c *Client) FindTrivialFact(ctx context.Context) (facts.FactTopic, error) {
 	path := "/random.json?language=en"
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, fmt.Sprintf("%s%s", c.host, path), nil)
 	if err != nil {
-		return facts.FactTopic{}, eris.Wrap(err, "creating request for trivial facts failed")
+		return facts.Topic{}, eris.Wrap(err, "creating request for trivial facts failed")
 	}
 
 	res, err := c.httpClient.Do(req)
 	if err != nil {
 		if err != nil {
-			return facts.FactTopic{}, eris.Wrap(err, "request for trivial facts failed")
+			return facts.Topic{}, eris.Wrap(err, "request for trivial facts failed")
 		}
 	}
 
 	defer res.Body.Close()
 
 	if res.StatusCode != http.StatusOK {
-		return facts.FactTopic{}, eris.Wrap(fmt.Errorf("bad status code from server %d", res.StatusCode), "")
+		return facts.Topic{}, eris.Wrap(fmt.Errorf("bad status code from server %d", res.StatusCode), "")
 	}
 
 	if err = json.NewDecoder(res.Body).Decode(&response); err != nil {
-		return facts.FactTopic{}, eris.Wrap(err, "failed to parse response")
+		return facts.Topic{}, eris.Wrap(err, "failed to parse response")
 	}
 
-	return facts.FactTopic{
+	return facts.Topic{
 		Trivial: response.Fact,
 	}, nil
 }

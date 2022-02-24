@@ -33,6 +33,7 @@ func main() {
 		},
 	})
 
+	// traverses and prints existing routes/endpoints.
 	err := restServer.Router.Walk(func(route *mux.Route, router *mux.Router, ancestors []*mux.Route) error {
 		pathTemplate, err := route.GetPathTemplate()
 		if err == nil {

@@ -23,7 +23,7 @@ func Test_FindDogFact(t *testing.T) {
 		}
 
 		expected struct {
-			fact facts.FactTopic
+			fact facts.Topic
 			err  error
 		}
 	)
@@ -47,7 +47,7 @@ func Test_FindDogFact(t *testing.T) {
 				context.Background(),
 			},
 			expected{
-				fact: facts.FactTopic{
+				fact: facts.Topic{
 					Dog: "Dogs wag their tail when they are happy",
 				},
 			},
@@ -139,7 +139,7 @@ func Test_FindCatFact(t *testing.T) {
 		}
 
 		expected struct {
-			fact facts.FactTopic
+			fact facts.Topic
 			err  error
 		}
 	)
@@ -162,7 +162,7 @@ func Test_FindCatFact(t *testing.T) {
 				context.Background(),
 			},
 			expected{
-				fact: facts.FactTopic{
+				fact: facts.Topic{
 					Cat: "Cats are felines",
 				},
 			},
@@ -254,7 +254,7 @@ func Test_FindEntertainmentFact(t *testing.T) {
 		}
 
 		expected struct {
-			fact facts.FactTopic
+			fact facts.Topic
 			err  error
 		}
 	)
@@ -279,7 +279,7 @@ func Test_FindEntertainmentFact(t *testing.T) {
 				context.Background(),
 			},
 			expected{
-				fact: facts.FactTopic{
+				fact: facts.Topic{
 					Entertainment: "Water is made out of 2 hydrogen molecules and one oxygen molecule",
 				},
 			},
@@ -371,7 +371,7 @@ func Test_FindTrivialFact(t *testing.T) {
 		}
 
 		expected struct {
-			fact facts.FactTopic
+			fact facts.Topic
 			err  error
 		}
 	)
@@ -392,7 +392,7 @@ func Test_FindTrivialFact(t *testing.T) {
 				context.Background(),
 			},
 			expected{
-				fact: facts.FactTopic{
+				fact: facts.Topic{
 					Trivial: "On every continent there is a city called Rome",
 				},
 			},
