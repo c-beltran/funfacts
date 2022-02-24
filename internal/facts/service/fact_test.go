@@ -104,6 +104,54 @@ func TestFactSvc_Find(t *testing.T) {
 				err: nil,
 			},
 		},
+		{
+			name: "FindDogFact Err",
+			setup: func(s *setupFactSvc) {
+				s.DFinder.FindDogFactReturns(facts.Topic{}, eris.New("dog fact finder error"))
+			},
+			input: input{
+				topic: "dog",
+			},
+			expected: expected{
+				err: eris.New("dog fact finder error"),
+			},
+		},
+		{
+			name: "FindCatFact Err",
+			setup: func(s *setupFactSvc) {
+				s.CFinder.FindCatFactReturns(facts.Topic{}, eris.New("cat fact finder error"))
+			},
+			input: input{
+				topic: "cat",
+			},
+			expected: expected{
+				err: eris.New("cat fact finder error"),
+			},
+		},
+		{
+			name: "FindEntertainmentFact Err",
+			setup: func(s *setupFactSvc) {
+				s.EFinder.FindEntertainmentFactReturns(facts.Topic{}, eris.New("entertainment fact finder error"))
+			},
+			input: input{
+				topic: "entertainment",
+			},
+			expected: expected{
+				err: eris.New("entertainment fact finder error"),
+			},
+		},
+		{
+			name: "FindTrivialFact Err",
+			setup: func(s *setupFactSvc) {
+				s.TFinder.FindTrivialFactReturns(facts.Topic{}, eris.New("trivial fact finder error"))
+			},
+			input: input{
+				topic: "trivial",
+			},
+			expected: expected{
+				err: eris.New("trivial fact finder error"),
+			},
+		},
 	}
 
 	for _, test := range tests {
