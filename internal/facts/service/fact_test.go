@@ -26,7 +26,7 @@ func TestFactSvc_Find(t *testing.T) {
 		}
 
 		input struct {
-			topic string
+			topic facts.TopicType
 		}
 	)
 
@@ -44,7 +44,7 @@ func TestFactSvc_Find(t *testing.T) {
 				}, nil)
 			},
 			input: input{
-				topic: "dog",
+				topic: facts.TopicTypeDog,
 			},
 			expected: expected{
 				fact: facts.Topic{
@@ -61,7 +61,7 @@ func TestFactSvc_Find(t *testing.T) {
 				}, nil)
 			},
 			input: input{
-				topic: "cat",
+				topic: facts.TopicTypeCat,
 			},
 			expected: expected{
 				fact: facts.Topic{
@@ -78,7 +78,7 @@ func TestFactSvc_Find(t *testing.T) {
 				}, nil)
 			},
 			input: input{
-				topic: "entertainment",
+				topic: facts.TopicTypeEntertainment,
 			},
 			expected: expected{
 				fact: facts.Topic{
@@ -95,7 +95,7 @@ func TestFactSvc_Find(t *testing.T) {
 				}, nil)
 			},
 			input: input{
-				topic: "trivial",
+				topic: facts.TopicTypeTrivial,
 			},
 			expected: expected{
 				fact: facts.Topic{
@@ -110,7 +110,7 @@ func TestFactSvc_Find(t *testing.T) {
 				s.DFinder.FindDogFactReturns(facts.Topic{}, eris.New("dog fact finder error"))
 			},
 			input: input{
-				topic: "dog",
+				topic: facts.TopicTypeDog,
 			},
 			expected: expected{
 				err: eris.New("dog fact finder error"),
@@ -122,7 +122,7 @@ func TestFactSvc_Find(t *testing.T) {
 				s.CFinder.FindCatFactReturns(facts.Topic{}, eris.New("cat fact finder error"))
 			},
 			input: input{
-				topic: "cat",
+				topic: facts.TopicTypeCat,
 			},
 			expected: expected{
 				err: eris.New("cat fact finder error"),
@@ -134,7 +134,7 @@ func TestFactSvc_Find(t *testing.T) {
 				s.EFinder.FindEntertainmentFactReturns(facts.Topic{}, eris.New("entertainment fact finder error"))
 			},
 			input: input{
-				topic: "entertainment",
+				topic: facts.TopicTypeEntertainment,
 			},
 			expected: expected{
 				err: eris.New("entertainment fact finder error"),
@@ -146,7 +146,7 @@ func TestFactSvc_Find(t *testing.T) {
 				s.TFinder.FindTrivialFactReturns(facts.Topic{}, eris.New("trivial fact finder error"))
 			},
 			input: input{
-				topic: "trivial",
+				topic: facts.TopicTypeTrivial,
 			},
 			expected: expected{
 				err: eris.New("trivial fact finder error"),

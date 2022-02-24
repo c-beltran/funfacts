@@ -8,7 +8,7 @@ import (
 
 type (
 	FactSvc interface {
-		Find(ctx context.Context, topic string) (facts.Topic, error)
+		Find(ctx context.Context, topic facts.TopicType) (facts.Topic, error)
 	}
 
 	RegisterParams struct {

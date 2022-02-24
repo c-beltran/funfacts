@@ -3,6 +3,7 @@ package rest
 import (
 	"net/http"
 
+	"github.com/c-beltran/funfacts/internal/facts"
 	"github.com/gorilla/mux"
 )
 
@@ -21,7 +22,7 @@ func registerEntertainmentFactHandlers(router *mux.Router, server *Server, svc F
 func getEntertainmentFact(svc FactSvc) func(*http.Request, *Server, map[string]interface{}) (interface{}, error) {
 	return func(r *http.Request, s *Server, m map[string]interface{}) (interface{}, error) {
 
-		fact, err := svc.Find(r.Context(), "entertainment")
+		fact, err := svc.Find(r.Context(), facts.TopicTypeEntertainment)
 		if err != nil {
 			return nil, err
 		}

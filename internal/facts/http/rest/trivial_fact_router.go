@@ -3,6 +3,7 @@ package rest
 import (
 	"net/http"
 
+	"github.com/c-beltran/funfacts/internal/facts"
 	"github.com/gorilla/mux"
 )
 
@@ -21,7 +22,7 @@ func registerTrivialFactHandlers(router *mux.Router, server *Server, svc FactSvc
 func getTrivialFact(svc FactSvc) func(*http.Request, *Server, map[string]interface{}) (interface{}, error) {
 	return func(r *http.Request, s *Server, m map[string]interface{}) (interface{}, error) {
 
-		fact, err := svc.Find(r.Context(), "trivial")
+		fact, err := svc.Find(r.Context(), facts.TopicTypeTrivial)
 		if err != nil {
 			return nil, err
 		}

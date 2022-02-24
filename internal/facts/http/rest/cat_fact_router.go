@@ -3,6 +3,7 @@ package rest
 import (
 	"net/http"
 
+	"github.com/c-beltran/funfacts/internal/facts"
 	"github.com/gorilla/mux"
 )
 
@@ -21,7 +22,7 @@ func registerCatFactHandlers(router *mux.Router, server *Server, svc FactSvc) {
 func getCatFact(svc FactSvc) func(*http.Request, *Server, map[string]interface{}) (interface{}, error) {
 	return func(r *http.Request, s *Server, m map[string]interface{}) (interface{}, error) {
 
-		fact, err := svc.Find(r.Context(), "cat")
+		fact, err := svc.Find(r.Context(), facts.TopicTypeCat)
 		if err != nil {
 			return nil, err
 		}

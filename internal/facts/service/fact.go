@@ -39,29 +39,29 @@ type (
 	}
 )
 
-func (svc FactSVC) Find(ctx context.Context, topic string) (facts.Topic, error) {
+func (svc FactSVC) Find(ctx context.Context, topic facts.TopicType) (facts.Topic, error) {
 	var (
 		fact facts.Topic
 		err  error
 	)
 
 	switch topic {
-	case "cat":
+	case facts.TopicTypeCat:
 		fact, err = svc.CFinder.FindCatFact(ctx)
 		if err != nil {
 			return facts.Topic{}, eris.Wrap(err, "unable to find cat fact")
 		}
-	case "dog":
+	case facts.TopicTypeDog:
 		fact, err = svc.DFinder.FindDogFact(ctx)
 		if err != nil {
 			return facts.Topic{}, eris.Wrap(err, "unable to find dog fact")
 		}
-	case "entertainment":
+	case facts.TopicTypeEntertainment:
 		fact, err = svc.EFinder.FindEntertainmentFact(ctx)
 		if err != nil {
 			return facts.Topic{}, eris.Wrap(err, "unable to find entertainment fact")
 		}
-	case "trivial":
+	case facts.TopicTypeTrivial:
 		fact, err = svc.TFinder.FindTrivialFact(ctx)
 		if err != nil {
 			return facts.Topic{}, eris.Wrap(err, "unable to find trivial fact")
