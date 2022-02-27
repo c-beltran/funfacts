@@ -6,7 +6,12 @@ import (
 	"github.com/c-beltran/funfacts/internal/facts"
 )
 
+//go:generate go run github.com/maxbrunsfeld/counterfeiter/v6 -generate
+
+//counterfeiter:generate -o ../../facttesting/fake_fact_service.gen.go . FactSvc
+
 type (
+	// FactSvc defines the fact Service.
 	FactSvc interface {
 		Find(ctx context.Context, topic facts.TopicType) (facts.Topic, error)
 	}
