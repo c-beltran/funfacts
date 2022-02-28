@@ -1,7 +1,7 @@
 package rest_test
 
 import (
-	"errors"
+	"encoding/json"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -15,10 +15,6 @@ func Test_getCartAsset(t *testing.T) {
 	t.Parallel()
 
 	type (
-		// svcArgs struct {
-		// 	ID int64
-		// }
-
 		responseUnion struct {
 			Error string `json:"error"`
 			rest.GetCatFactResponse
@@ -27,7 +23,6 @@ func Test_getCartAsset(t *testing.T) {
 		output struct {
 			statusCode int
 			response   responseUnion
-			// serviceArgs *svcArgs
 		}
 
 		input struct {
@@ -56,26 +51,6 @@ func Test_getCartAsset(t *testing.T) {
 						Fact: "meow",
 					},
 				},
-				// serviceArgs: &svcArgs{
-				// 	ID: 10,
-				// },
-			},
-		},
-		{
-			"Service error",
-			input{
-				svc: func(s *setupServer) {
-					s.factSVC.FindReturns(facts.Topic{}, errors.New("FactSvc.CatFact error"))
-				},
-			},
-			output{
-				statusCode: http.StatusInternalServerError,
-				response: responseUnion{
-					Error: "FactSvc.CatFact error",
-				},
-				// serviceArgs: &svcArgs{
-				// 	ID: 10,
-				// },
 			},
 		},
 	}
@@ -89,16 +64,21 @@ func Test_getCartAsset(t *testing.T) {
 			s, server := newServer()
 			tt.input.svc(s)
 
-			res := httptest.NewRequest(server.Router, t, http.MethodGet, "/delivery/assets/carts/10")
+			res := doRequest(server.Router, httptest.NewRequest(http.MethodGet, "/ffact/cat", nil))
 
-			resttesting.TestResponseCode(t, tt.output.statusCode, res.StatusCode)
-			resttesting.TestResponse(t, res.Body, &tt.output.response, new(responseUnion))
+			catFact := rest.GetCatFactResponse{}
 
-			if tt.output.serviceArgs != nil {
-				_, ID := s.cartAsset.CartArgsForCall(0)
-				if diff := cmp.Diff(*tt.output.serviceArgs, svcArgs{ID}); diff != "" {
-					t.Errorf("CartArgsForCall don't match:\n%s", diff)
-				}
+			if err := json.NewDecoder(res.Body).Decode(&catFact); err != nil {
+				t.Fatalf("error unmarshaling body: %s", err)
+			}
+			defer res.Body.Close()
+
+			if res.StatusCode != tt.output.statusCode {
+				t.Errorf("response status does not match: %d | %d", res.StatusCode, tt.output.statusCode)
+			}
+
+			if diff := cmp.Diff(tt.output.response.GetCatFactResponse, catFact); diff != "" {
+				t.Errorf("response doesn't match:\n%s", diff)
 			}
 		})
 	}
