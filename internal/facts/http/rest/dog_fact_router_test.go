@@ -11,13 +11,13 @@ import (
 	"github.com/google/go-cmp/cmp"
 )
 
-func Test_getCatAsset(t *testing.T) {
+func Test_getDogAsset(t *testing.T) {
 	t.Parallel()
 
 	type (
 		responseUnion struct {
 			Error string `json:"error"`
-			rest.GetCatFactResponse
+			rest.GetDogFactResponse
 		}
 
 		output struct {
@@ -40,15 +40,15 @@ func Test_getCatAsset(t *testing.T) {
 			input{
 				svc: func(s *setupServer) {
 					s.factSVC.FindReturns(facts.Topic{
-						Cat: "meow",
+						Dog: "woof",
 					}, nil)
 				},
 			},
 			output{
 				statusCode: http.StatusOK,
 				response: responseUnion{
-					GetCatFactResponse: rest.GetCatFactResponse{
-						Fact: "meow",
+					GetDogFactResponse: rest.GetDogFactResponse{
+						Fact: "woof",
 					},
 				},
 			},
@@ -64,11 +64,11 @@ func Test_getCatAsset(t *testing.T) {
 			s, server := newServer()
 			tt.input.svc(s)
 
-			res := doRequest(server.Router, httptest.NewRequest(http.MethodGet, "/ffact/cat", nil))
+			res := doRequest(server.Router, httptest.NewRequest(http.MethodGet, "/ffact/dog", nil))
 
-			catFact := rest.GetCatFactResponse{}
+			dogFact := rest.GetDogFactResponse{}
 
-			if err := json.NewDecoder(res.Body).Decode(&catFact); err != nil {
+			if err := json.NewDecoder(res.Body).Decode(&dogFact); err != nil {
 				t.Fatalf("error unmarshaling body: %s", err)
 			}
 			defer res.Body.Close()
@@ -77,7 +77,7 @@ func Test_getCatAsset(t *testing.T) {
 				t.Errorf("response status does not match: %d | %d", res.StatusCode, tt.output.statusCode)
 			}
 
-			if diff := cmp.Diff(tt.output.response.GetCatFactResponse, catFact); diff != "" {
+			if diff := cmp.Diff(tt.output.response.GetDogFactResponse, dogFact); diff != "" {
 				t.Errorf("response doesn't match:\n%s", diff)
 			}
 		})
